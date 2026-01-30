@@ -1,0 +1,57 @@
+<!-- Recent Claims Table -->
+<section class="table-section">
+  <div class="table-header">
+    <h3>Reclamos recientes</h3>
+    <button class="more-btn" type="button" aria-label="Más opciones">
+      <span class="material-icons-outlined">more_vert</span>
+    </button>
+  </div>
+
+  <div class="table-wrapper">
+    <table class="claims-table">
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Cliente</th>
+          <th>Libro</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (claim of recentClaims; track claim.id) {
+        <tr>
+          <td class="code-cell">
+            <strong>{{ claim.code }}</strong>
+          </td>
+          <td class="client-cell">
+            <div class="client-info">
+              <strong>{{ claim.client }}</strong>
+              <small>{{ claim.document }}</small>
+            </div>
+          </td>
+          <td class="book-cell">{{ claim.book }}</td>
+          <td class="date-cell">
+            <div class="date-info">
+              <strong>{{ claim.date }}</strong>
+              <small>{{ claim.daysAgo }}</small>
+            </div>
+          </td>
+          <td class="status-cell">
+            <span class="badge" [class.badge-pending]="claim.status === 'Pendiente'"
+              [class.badge-resolved]="claim.status === 'Resuelto'">
+              {{ claim.status }}
+            </span>
+          </td>
+          <td class="actions-cell">
+            <a href="#" class="action-link" title="Ver detalle">
+              <span class="material-icons-outlined">visibility</span>
+            </a>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

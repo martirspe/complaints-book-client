@@ -1,0 +1,17 @@
+<!-- KPI Cards -->
+<section class="kpi-section">
+  @for (kpi of kpis; track kpi.title) {
+  <div class="kpi-card">
+    <div class="kpi-header">
+      <span class="kpi-title">{{ kpi.title }}</span>
+      <span class="material-icons-outlined kpi-icon" [style.color]="kpi.color">{{ kpi.icon }}</span>
+    </div>
+    <div class="kpi-value">{{ kpi.value }}</div>
+    <div class="kpi-change" [class.positive]="kpi.change > 0">
+      <span class="material-icons-outlined arrow">trending_up</span>
+      <span class="percentage">+{{ kpi.change }}%</span>
+      <span class="label">vs mes anterior</span>
+    </div>
+  </div>
+  }
+</section>

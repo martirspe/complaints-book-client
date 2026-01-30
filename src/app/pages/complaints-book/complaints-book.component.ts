@@ -153,7 +153,7 @@ export class ComplaintsBookComponent {
       if (tenant) {
         this.loadInitialData();
       }
-    }, { allowSignalWrites: true });
+    });
   }
 
   /**

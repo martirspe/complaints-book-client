@@ -1,0 +1,37 @@
+:host {
+  display: block;
+  padding: 0;
+}
+
+:host ::ng-deep {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* KPIs Section */
+:host ::ng-deep app-dashboard-kpis {
+  display: block;
+}
+
+/* Charts Section */
+:host ::ng-deep app-dashboard-charts {
+  display: block;
+}
+
+/* Claims Table Section */
+:host ::ng-deep app-dashboard-claims-table {
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  :host ::ng-deep {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  :host ::ng-deep {
+    gap: 0.75rem;
+  }
+}

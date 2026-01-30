@@ -1,0 +1,115 @@
+<aside class="sidebar" [class.minimized]="!sidebarExpanded()">
+  <div class="sidebar-header">
+    <img src="assets/images/logos/favicon.png" alt="ReclamoFácil" class="sidebar-logo">
+    @if (sidebarExpanded()) {
+      <small>Administrador</small>
+    }
+  </div>
+
+  <nav class="sidebar-menu">
+    <a href="#" class="menu-item active" data-tooltip="Dashboard">
+      <span class="material-icons-outlined icon">dashboard</span>
+      @if (sidebarExpanded()) {
+        <span>Dashboard</span>
+      }
+    </a>
+    <a href="#" class="menu-item" data-tooltip="Suscripciones">
+      <span class="material-icons-outlined icon">credit_card</span>
+      @if (sidebarExpanded()) {
+        <span>Suscripciones</span>
+      }
+    </a>
+    <a href="#" class="menu-item" data-tooltip="Empresas">
+      <span class="material-icons-outlined icon">business</span>
+      @if (sidebarExpanded()) {
+        <span>Empresas</span>
+      }
+    </a>
+    <a href="#" class="menu-item" data-tooltip="Libros">
+      <span class="material-icons-outlined icon">menu_book</span>
+      @if (sidebarExpanded()) {
+        <span>Libros</span>
+      }
+    </a>
+    <a href="#" class="menu-item" data-tooltip="Reclamos">
+      <span class="material-icons-outlined icon">description</span>
+      @if (sidebarExpanded()) {
+        <span>Reclamos</span>
+      }
+    </a>
+    <a href="#" class="menu-item" data-tooltip="Ajustes">
+      <span class="material-icons-outlined icon">settings</span>
+      @if (sidebarExpanded()) {
+        <span>Ajustes</span>
+      }
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a href="#" class="menu-item" data-tooltip="Soporte">
+      <span class="material-icons-outlined icon">headset_mic</span>
+      @if (sidebarExpanded()) {
+        <span>Soporte</span>
+      }
+    </a>
+    <a href="#" class="menu-item" data-tooltip="Feedback">
+      <span class="material-icons-outlined icon">feedback</span>
+      @if (sidebarExpanded()) {
+        <span>Feedback</span>
+      }
+    </a>
+  </div>
+
+  <div class="user-section" (click)="toggleUserMenu()" [attr.aria-expanded]="userMenuOpen()" role="button" tabindex="0">
+    <div class="user-avatar">{{ userInitials() }}</div>
+    @if (sidebarExpanded()) {
+      <div class="user-info">
+        <p class="user-name">{{ userName() }}</p>
+        <small>{{ userEmail() }}</small>
+      </div>
+      <button class="more-btn" type="button" aria-label="Más opciones" [attr.aria-expanded]="userMenuOpen()" aria-haspopup="menu">
+        <span class="material-icons-outlined">{{ userMenuOpen() ? 'expand_less' : 'expand_more' }}</span>
+      </button>
+    }
+
+    @if (userMenuOpen() && sidebarExpanded()) {
+      <div class="user-dropdown" (click)="$event.stopPropagation()" role="menu">
+        <div class="user-dropdown-header">
+          <div class="user-avatar-large">{{ userInitials() }}</div>
+          <div class="user-dropdown-info">
+            <p class="user-dropdown-name">{{ userName() }}</p>
+            <small class="user-dropdown-email">{{ userEmail() }}</small>
+          </div>
+        </div>
+
+        <div class="user-dropdown-divider"></div>
+
+        <nav class="user-dropdown-menu">
+          <a href="#" class="user-dropdown-item">
+            <span class="material-icons-outlined">person</span>
+            <span>Ver Perfil</span>
+          </a>
+          <a href="#" class="user-dropdown-item">
+            <span class="material-icons-outlined">task_alt</span>
+            <span>Mis Tareas</span>
+          </a>
+          <a href="#" class="user-dropdown-item">
+            <span class="material-icons-outlined">settings</span>
+            <span>Configuración</span>
+          </a>
+          <a href="#" class="user-dropdown-item">
+            <span class="material-icons-outlined">workspace_premium</span>
+            <span>Actualizar Plan</span>
+          </a>
+        </nav>
+
+        <div class="user-dropdown-divider"></div>
+
+        <button class="user-dropdown-item logout-btn" (click)="logout(); $event.stopPropagation()">
+          <span class="material-icons-outlined">logout</span>
+          <span>Cerrar Sesión</span>
+        </button>
+      </div>
+    }
+  </div>
+</aside>

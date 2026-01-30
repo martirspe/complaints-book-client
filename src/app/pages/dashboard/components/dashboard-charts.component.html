@@ -1,0 +1,115 @@
+<!-- Charts Section -->
+<section class="charts-section">
+  <!-- Estado de Reclamos -->
+  <div class="chart-card">
+    <div class="chart-header">
+      <h3>Estado de reclamos</h3>
+      <div class="chart-legend">
+        <div class="legend-item">
+          <span class="legend-color" style="background: #00c27a;"></span>
+          <span>Resueltos</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color" style="background: #f59e0b;"></span>
+          <span>Pendientes</span>
+        </div>
+      </div>
+    </div>
+    <div class="chart-body">
+      <div class="chart-axis">
+        @for (tick of getYAxisTicks(); track $index) {
+        <span>{{ tick }}</span>
+        }
+      </div>
+      <div class="chart-plot">
+        <div class="bar-chart">
+          <div class="chart-grid">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          @for (data of chartData; track data.label) {
+          <div class="bar-group">
+            <div class="bar-pair">
+              <div class="bar-column resolved"
+                [style.height.%]="getBarHeight(data.resolved)"
+                [title]="data.resolved + ' Resueltos'">
+                <div class="bar-tooltip">
+                  <div class="tooltip-title">{{ data.tooltipLabel }}</div>
+                  <div class="tooltip-row">
+                    <span class="dot resolved"></span>
+                    <span>Resueltos</span>
+                    <strong>{{ data.resolved }}</strong>
+                  </div>
+                  <div class="tooltip-row">
+                    <span class="dot pending"></span>
+                    <span>Pendientes</span>
+                    <strong>{{ data.pending }}</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="bar-column pending"
+                [style.height.%]="getBarHeight(data.pending)"
+                [title]="data.pending + ' Pendientes'"></div>
+            </div>
+          </div>
+          }
+        </div>
+        <div class="bar-labels">
+          @for (data of chartData; track data.label) {
+          <span class="bar-label-month">{{ data.label }}</span>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Prioridad de Reclamos -->
+  <div class="priority-card">
+    <div class="priority-header">
+      <h3>Prioridad de reclamos</h3>
+      <button class="more-btn" type="button" aria-label="Más opciones">
+        <span class="material-icons-outlined">more_horiz</span>
+      </button>
+    </div>
+    <div class="priority-legend">
+      <span class="legend-item">
+        <span class="legend-color" style="background: #ef4444;"></span>
+        Crítica
+      </span>
+      <span class="legend-item">
+        <span class="legend-color" style="background: #f59e0b;"></span>
+        Alta
+      </span>
+      <span class="legend-item">
+        <span class="legend-color" style="background: #3b82f6;"></span>
+        Normal
+      </span>
+    </div>
+    <div class="donut-wrapper">
+      <svg class="donut" viewBox="0 0 100 100" aria-label="Prioridad de reclamos">
+        <circle class="donut-track" cx="50" cy="50" r="38"></circle>
+        @for (segment of getDonutSegments(); track $index) {
+        <circle class="donut-segment"
+          cx="50" cy="50" r="38"
+          [attr.stroke]="segment.color"
+          [attr.stroke-dasharray]="segment.dasharray"
+          [attr.stroke-dashoffset]="segment.dashoffset"></circle>
+        }
+      </svg>
+      <div class="donut-center">
+        <div class="donut-value">{{ getTotalPendingClaims() }}</div>
+        <small>pendientes</small>
+      </div>
+    </div>
+    <div class="priority-summary">
+      @for (priority of priorityData; track priority.label) {
+      <div class="priority-item">
+        <span class="priority-count-text">{{ priority.count }}</span>
+        <span class="priority-name">{{ priority.label.replace('Prioridad ', '') }}</span>
+      </div>
+      }
+    </div>
+  </div>
+</section>

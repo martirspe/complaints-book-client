@@ -1,1 +1,28 @@
-<p>dashboard works!</p>
+<section class="dashboard-page">
+  <header class="dashboard-header">
+    <div class="header-left">
+      <div class="breadcrumb-wrapper">
+        <button class="sidebar-toggle" (click)="toggleSidebar()" [attr.aria-label]="'Alternar menú'">
+          <span class="material-icons-outlined">menu</span>
+        </button>
+        <span class="breadcrumb">Dashboard</span>
+      </div>
+      <h1>{{ greeting() }}</h1>
+    </div>
+    <div class="header-right">
+      <div class="quick-filters">
+        <button type="button" class="pill-btn">Hoy</button>
+        <button type="button" class="pill-btn">Esta semana</button>
+        <button type="button" class="pill-btn">Este mes</button>
+        <button type="button" class="pill-btn pill-active">
+          <span class="material-icons-outlined">event</span>
+          01 Dic, 2025 - 01 Feb, 2026
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="dashboard-content-wrapper">
+    <ng-container *ngComponentOutlet="dashboardContentComponent"></ng-container>
+  </div>
+</section>
